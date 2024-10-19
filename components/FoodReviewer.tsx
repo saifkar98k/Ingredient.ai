@@ -164,7 +164,7 @@ const Component = () => {
                   <span
                     className={`font-semibold ${getHealthColor(overallRating)}`}
                   >
-                    {overallRating} - {getHealthLabel(overallRating)}
+                    Rank {overallRating} - {getHealthLabel(overallRating)}
                   </span>
                 </AlertDescription>
                 <div className='md:fixed top-4 right-4'>
