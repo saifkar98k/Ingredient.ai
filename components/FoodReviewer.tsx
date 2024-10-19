@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import Logo from '/logo.png'
+import Logo from '@/public/logo.png'
 import {
   Card,
   CardContent,
@@ -122,8 +122,10 @@ const Component = () => {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
+      <p className='text-[#FF9933]'>Lable <span className='text-[#000080]'>Padhega</span> <span className='text-[#138808]'>India</span></p>
+
+      <Image src={Logo} alt='Logo' className='w-36' />
         <CardTitle>Packaged Food Ingredients Reviewer</CardTitle>
-        <Image src={Logo} alt='Logo' />
         <CardDescription>
           Enter the ingredients list from a packaged food item to get health
           ratings.
@@ -170,11 +172,11 @@ const Component = () => {
                     Rank {overallRating} - {getHealthLabel(overallRating)}
                   </span>
                 </AlertDescription>
-                <div className='md:fixed top-4 right-4'>
+                <div className='md:fixed top-4 right-6'>
 
                 <p className='text-xs text-black text-center mb-2 font-bold'>How Rank works ?</p>
 
-                <div className='p-4 text-center bg-black rounded flex flex-col gap-2 justify-center items-center '>
+                <div className='p-4 text-center shadow-2xl md:hover:scale-110 transition-all ease-in-out border-grey-100 rounded flex flex-col gap-2 justify-center items-center '>
                   <h6 className='text-xs text-green-500'>Rank 1 = Healthy</h6>
                   <h6 className='text-xs text-yellow-500'>Rank 2 = Caution</h6>
                   <h6 className='text-xs text-red-500'>Rank 3 = Harmful</h6>
@@ -185,6 +187,8 @@ const Component = () => {
             )}
           </div>
         )}
+        <p className='font-medium text-xs mt-4 text-end'>Project by Saif and Team</p>
+
       </CardContent>
     </Card>
   );
