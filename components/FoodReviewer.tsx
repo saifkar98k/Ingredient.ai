@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import Logo from '/logo.png'
 import {
   Card,
   CardContent,
@@ -12,6 +13,7 @@ import {
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { InfoIcon } from 'lucide-react';
 import Groq from 'groq-sdk';
+import Image from 'next/image';
 
 const client = new Groq({
   apiKey: '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',
@@ -121,6 +123,7 @@ const Component = () => {
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle>Packaged Food Ingredients Reviewer</CardTitle>
+        <Image src={Logo} alt='Logo' />
         <CardDescription>
           Enter the ingredients list from a packaged food item to get health
           ratings.
