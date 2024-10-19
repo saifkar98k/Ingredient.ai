@@ -28,7 +28,7 @@ const Component = () => {
   const getIngredientHealthRating = async (
     ingredient: string
   ): Promise<{ rate: number; dose: number }> => {
-    const prompt = `What is the health rating for ${ingredient}?, rate ingredients returns the 1,2,3 if 1 means bad for health, 2 means use in limit and 3 means good for health, I just need rating number object with key overAllHealthRate and dailyLimitedDosage in milli-grams no additional data or information`;
+    const prompt = `What is the health rating for ${ingredient}?, rate ingredients returns the 1,2,3 if 1 means goog for health, 2 means use in limit and 3 means bad for health, I just need rating number object with key overAllHealthRate and dailyLimitedDosage in milli-grams no additional data or information`;
     const chatCompletion = await client.chat.completions.create({
       messages: [
         {
@@ -37,7 +37,7 @@ const Component = () => {
         },
       ],
       model: 'llama-3.1-70b-versatile',
-    });
+     });
 
     const response = chatCompletion.choices[0]?.message?.content;
 
@@ -48,7 +48,7 @@ const Component = () => {
         const trimmedString = splitResponse[1]?.replace(/[^0-9]/g, '');
         const rate = Number(trimmedString);
         const dose = Number(splitResponse[2]?.replace(/[^0-9]/g, ''));
-        console.log({ response, rate, dose });
+        console.log({ ingredient, response, rate, dose });
         return { rate, dose };
       } else {
         console.error("String 'overAllHealthRate' not found in the response.");
@@ -94,11 +94,11 @@ const Component = () => {
   const getHealthLabel = (rating: number) => {
     switch (rating) {
       case 1:
-        return 'Bad for health';
+        return 'Good for health';
       case 2:
         return 'Use in moderation';
       case 3:
-        return 'Good for health';
+        return 'Bad for health';
       default:
         return 'Unknown';
     }
@@ -107,11 +107,11 @@ const Component = () => {
   const getHealthColor = (rating: number) => {
     switch (rating) {
       case 1:
-        return 'text-red-500';
+        return 'text-green-500';
       case 2:
         return 'text-yellow-500';
       case 3:
-        return 'text-green-500';
+        return 'text-red-500';
       default:
         return 'text-gray-500';
     }
@@ -151,7 +151,7 @@ const Component = () => {
                 >
                   <span className="capitalize">{ingredient}</span>
                   <span className={`font-semibold ${getHealthColor(rate)}`}>
-                    {rate} - {getHealthLabel(rate)} (Daily Limit: {dose} mg)
+                    Rank {rate} - {getHealthLabel(rate)} (Daily Limit: {dose} mg)
                   </span>
                 </li>
               ))}
@@ -167,6 +167,17 @@ const Component = () => {
                     {overallRating} - {getHealthLabel(overallRating)}
                   </span>
                 </AlertDescription>
+                <div className='md:fixed top-4 right-4'>
+
+                <p className='text-xs text-black text-center mb-2 font-bold'>How Rank works ?</p>
+
+                <div className='p-4 text-center bg-black rounded flex flex-col gap-2 justify-center items-center '>
+                  <h6 className='text-xs text-green-500'>Rank 1 = Healthy</h6>
+                  <h6 className='text-xs text-yellow-500'>Rank 2 = Caution</h6>
+                  <h6 className='text-xs text-red-500'>Rank 3 = Harmful</h6>
+                </div>
+                </div>
+
               </Alert>
             )}
           </div>
