@@ -168,7 +168,7 @@ export default function Component() {
                         How Rank works?
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="p-4 text-center shadow-2xl transition-all ease-in-out border border-gray-700 rounded flex flex-col gap-2 justify-center items-center bg-gray-800">
+                        <div className="p-4 shadow-2xl transition-all ease-in-out border border-gray-700 rounded flex flex-col gap-2 justify-center bg-gray-800">
                           <h6 className="text-xs text-green-500">Rank 1 = Healthy</h6>
                           <h6 className="text-xs text-yellow-500">Rank 2 = Caution</h6>
                           <h6 className="text-xs text-red-500">Rank 3 = Harmful</h6>
