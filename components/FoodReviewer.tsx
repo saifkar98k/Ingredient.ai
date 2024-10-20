@@ -181,7 +181,7 @@ export default function Component() {
             )}
           </div>
         )}
-        <p className="font-medium text-xs mt-4 text-end text-gray-400">Project by Saif and Team</p>
+        <a href='https://github.com/saifkar98k' target='_blank'><p className="font-medium text-xs mt-4 text-end text-gray-400">Project by Saif and Team</p></a>
       </CardContent>
     </Card>
   )
