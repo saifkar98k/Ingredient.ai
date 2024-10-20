@@ -74,8 +74,10 @@ const Component = () => {
     for (const ingredient of ingredientList) {
       if (ingredient) {
         let healthRating = await getIngredientHealthRating(ingredient);
-        while (healthRating.rate === 0) {
+        let counter = 0;
+        while (healthRating.rate === 0 && counter < 3) {
           healthRating = await getIngredientHealthRating(ingredient);
+          counter++;
         }
         newResults[ingredient] = healthRating;
       }
@@ -102,7 +104,7 @@ const Component = () => {
       case 3:
         return 'Bad for health';
       default:
-        return 'Unknown';
+        return `AI couldn't match health ranking. Refine your search`;
     }
   };
 
@@ -122,9 +124,8 @@ const Component = () => {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-      <p className='text-[#FF9933]'>Lable <span className='text-[#000080]'>Padhega</span> <span className='text-[#138808]'>India</span></p>
-
       <Image src={Logo} alt='Logo' className='w-36' />
+      <p className='text-[#FF9933] font-bold'>Lable <span className='text-[#000080]'>Padhega</span> <span className='text-[#138808]'>India</span></p>
         <CardTitle>Packaged Food Ingredients Reviewer</CardTitle>
         <CardDescription>
           Enter the ingredients list from a packaged food item to get health
@@ -148,16 +149,20 @@ const Component = () => {
         {Object.keys(results).length > 0 && (
           <div className="mt-6">
             <h3 className="font-semibold mb-2">Ingredient Analysis:</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {Object.entries(results).map(([ingredient, { rate, dose }]) => (
                 <li
                   key={ingredient}
-                  className="flex justify-between items-center"
+                  className="flex flex-col md:flex-row md:justify-between md:items-center border-gray-400 border-b m-2"
                 >
                   <span className="capitalize">{ingredient}</span>
                   <span className={`font-semibold ${getHealthColor(rate)}`}>
-                    Rank {rate} - {getHealthLabel(rate)} (Daily Limit: {dose} mg)
-                  </span>
+                  {
+                    rate && rate > 0 && rate <= 3
+                      ? `Rank ${rate} - ${getHealthLabel(rate)}${dose && dose > 0 ? ` (Daily Limit - ${dose} mg)` : ''}` 
+                      : "AI unable to match health ranking. Refine your search."
+                  }
+                </span>
                 </li>
               ))}
             </ul>
