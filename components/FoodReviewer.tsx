@@ -11,6 +11,12 @@ import {
   CardDescription,
 } from "@/components/ui/card"
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { InfoIcon } from "lucide-react"
 import Image from "next/image"
 import Groq from 'groq-sdk'
@@ -155,13 +161,21 @@ export default function Component() {
                     Rank {overallRating} - {getHealthLabel(overallRating)}
                   </span>
                 </AlertDescription>
-                <div className="md:fixed top-4 right-6">
-                  <p className="text-xs text-white text-center mb-2 font-bold">How Rank works ?</p>
-                  <div className="p-4 text-center shadow-2xl md:hover:scale-110 transition-all ease-in-out border-gray-700 rounded flex flex-col gap-2 justify-center items-center bg-gray-800">
-                    <h6 className="text-xs text-green-500">Rank 1 = Healthy</h6>
-                    <h6 className="text-xs text-yellow-500">Rank 2 = Caution</h6>
-                    <h6 className="text-xs text-red-500">Rank 3 = Harmful</h6>
-                  </div>
+                <div className="md:fixed top-4 right-6 w-64">
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-xs font-bold text-white">
+                        How Rank works?
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="p-4 text-center shadow-2xl transition-all ease-in-out border border-gray-700 rounded flex flex-col gap-2 justify-center items-center bg-gray-800">
+                          <h6 className="text-xs text-green-500">Rank 1 = Healthy</h6>
+                          <h6 className="text-xs text-yellow-500">Rank 2 = Caution</h6>
+                          <h6 className="text-xs text-red-500">Rank 3 = Harmful</h6>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               </Alert>
             )}
